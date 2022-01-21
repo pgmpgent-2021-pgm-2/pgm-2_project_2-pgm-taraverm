@@ -1,0 +1,80 @@
+@font-face {
+  font-family: 'Gotham';
+  src: url('../fonts/GothamRounded-Book.woff');
+  font-weight: normal;
+}
+
+@font-face {
+  font-family: 'Gotham';
+  src: url('../fonts/GothamRounded-Bold.woff');
+  font-weight: bold;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Gotham';
+}
+
+section {
+  border: 1px #d47a9c solid;
+}
+
+h1 {
+  background: #eb94b5;
+  padding: 2rem;
+  color: #FFF;
+}
+
+h2 {
+  padding: 1rem;
+  border-bottom: 1px #d47a9c solid;
+  border-top: 1px #d47a9c solid;
+  background-color: #fff0f5;
+}
+
+ul {
+  list-style-type: none;
+}
+
+li {
+  padding: 1rem;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+.layout {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+}
+
+.box-layout {
+  width: 20rem;
+  max-width: 100%;
+}
+
+.chatbox {
+  width: 30rem;
+  max-width: 100%;
+}
+
+.selected {
+  background-color: #FD297B;
+  color: #FFF;
+}
+
+.user a {
+  display: flex;
+  align-items: center;
+}
+
+.user img {
+  border-radius: 1rem;
+  margin-right: 1rem;
+}
+
