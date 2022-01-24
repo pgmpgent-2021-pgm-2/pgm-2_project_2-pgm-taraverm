@@ -7194,5 +7194,42 @@
     "message": "Ik ben super blij jouw kennis te ontdekken ;)",
     "id": "4319759f-1b77-4c01-becc-3534cb5933d0",
     "createdAt": 1609531871337
+  },
+  {
+    "senderId": "679e8f13-f384-43a1-bef0-40059e5657f2",
+    "receiverId": "d4dd9a85-c036-4ba3-864f-ecef1e94baeb",
+    "message": "Hey daar ;)",
+    "id": "580f373b-df44-42b9-8aed-25a118b3161b",
+    "createdAt": 1643037102587
+  },
+  {
+    "senderId": "679e8f13-f384-43a1-bef0-40059e5657f2",
+    "message": "hey",
+    "id": "0e64c08e-be6a-47c4-b094-d83136889f04",
+    "createdAt": 1643041671524
+  },
+  {
+    "senderId": "679e8f13-f384-43a1-bef0-40059e5657f2",
+    "message": "test",
+    "id": "87afb0be-ea00-4b9d-8cd1-35f5b4b31ca4",
+    "createdAt": 1643041787844
+  },
+  {
+    "senderId": "c0fed28e-cc96-4d40-bebf-54832ff00ec3",
+    "message": "nog een test",
+    "id": "4200ba01-30a2-4455-96ab-9a0aef3ca3d8",
+    "createdAt": 1643041813976
+  },
+  {
+    "senderId": "679e8f13-f384-43a1-bef0-40059e5657f2",
+    "message": "hey",
+    "id": "4aa3069f-3fad-4bf8-9e0f-4049ef4725f9",
+    "createdAt": 1643041858857
+  },
+  {
+    "senderId": "679e8f13-f384-43a1-bef0-40059e5657f2",
+    "message": "hallo",
+    "id": "fbf86e91-6dbd-44b4-b467-caec28d2c12c",
+    "createdAt": 1643041963678
   }
 ]

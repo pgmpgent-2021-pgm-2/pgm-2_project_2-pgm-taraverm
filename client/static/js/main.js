@@ -14,6 +14,7 @@
       this.$incomingMessages = document.querySelector('.incoming-messages');
       this.$outgoingMessages = document.querySelector('.outgoing-messages');
       this.$conversationBox = document.querySelector('.conversation-messages');
+      this.$chatbox = document.querySelector('.chatbox');
       this.$matchesBox = document.querySelector('.matches');
     },
     registerListeners () {
@@ -22,16 +23,24 @@
         this.fetchReceivedMessagesFromUser(userId);
         this.fetchSentMessagesFromUser(userId);
         this.setActiveUser(userId);
-      })
+      });
       this.$incomingMessages.addEventListener('click', ev => {
         const messageId = ev.target.dataset.id || ev.target.parentNode.dataset.id || ev.target.parentNode.parentNode.dataset.id;
-        this.fetchConversationBetweenUsers(userId, friendId);
+        // this.fetchConversationBetweenUsers(userId, friendId);
         this.setActiveMessage(messageId);
-      })
+      });
+      this.$chatbox.addEventListener('submit', async ev => {
+        ev.preventDefault();
+        const message = {
+          senderId: this.currentUserId,
+          receiverId: this.currentFriendId,
+          message: ev.target['txtMessage'].value,
+        }
+        await this.tinderApi.addMessageBetweenUsers(message);
+      });
       this.$matchesBox.addEventListener('click', ev => {
         const matchId = ev.target.dataset.id || ev.target.parentNode.dataset.id || ev.target.parentNode.parentNode.dataset.id;
-        console.log(matchId);
-      })
+      });
     },
     async fetchUsers () {
       this.users = await this.tinderApi.getUsers();
@@ -62,12 +71,14 @@
     },
     async fetchReceivedMessagesFromUser (userId) {
       const receivedMessages = await this.tinderApi.getReceivedMessagesFromUser(userId);
-      // const user = this.users.find(user => user.id === receivedMessages.senderId);
+      // const user = this.users.find(user => friendId === user.id);
       this.$incomingMessages.innerHTML = receivedMessages.map(message => `
       <li class="incoming-message">
         <a href="#" data-id="${message.id}">
-          <h3>Naam</h3>
-          <p>${message.createdAt}</p>
+          <h3>
+            <span>${message.id}</span>
+            <span class="date">${moment(message.createdAt).fromNow()}</span>
+          </h3>
           <p>${message.message}</p>
         </a>
       </li>
@@ -80,17 +91,20 @@
       document.querySelector('.inbox-amount').innerText = receivedMessages.length;
     },
     async fetchSentMessagesFromUser (userId) {
-      this.sentMessages = await this.tinderApi.getSentMessagesFromUser(userId);
-      this.$outgoingMessages.innerHTML = this.sentMessages.map(message => `
+      const sentMessages = await this.tinderApi.getSentMessagesFromUser(userId);
+      // const user = this.users.find(user => user.id === sentMessages[0].receiverId);
+      this.$outgoingMessages.innerHTML = sentMessages.map(message => `
       <li class="outgoing-message">
         <a href="#" data-id="${message.id}">
-          <h3>user.firstName user.lastName</h3>
-          <p>${moment(message.createdAt).fromNow()}</p>
+          <h3>
+            <span>${message.id}<span>
+            <span class="date">${moment(message.createdAt).fromNow()}</span>
+          </h3>
           <p>${message.message}</p>
         </a>
       </li>
       `).join('');
-      document.querySelector('.outbox-amount').innerText = this.sentMessages.length;
+      document.querySelector('.outbox-amount').innerText = sentMessages.length;
     },
     setActiveMessage (messageId, friendId) {
       this.currentMessageId = messageId;
@@ -103,22 +117,21 @@
     },
     async fetchConversationBetweenUsers (userId, friendId) {
       this.conversation = await this.tinderApi.getConversationBetweenUsers(userId, friendId);
-      console.log(this.conversation);
       this.$conversationBox.innerHTML = this.conversation.map(m => `
       <div class="chatbox-message">
-        <p class="date">${m.createdAt}</p>
+        <p class="date">${moment(m.createdAt).format('LLL')}</p>
         <p>${m.message}</p>
       </div>
       `).join('');
     },
     async fetchMatchesFromUser (userId) {
-      this.matches = await this.tinderApi.getMatchesForUser(userId);
-      this.$matchesBox.innerHTML = this.matches.map(match => `
+      const matches = await this.tinderApi.getMatchesForUser(userId);
+      // const user = this.users.find(user => user.id === matches[0].friendId);
+      this.$matchesBox.innerHTML = matches.map(match => `
       <li class="match">
-        <a href="#">
-          <p>${match.userId}</p>
-          <p>${match.rating}</p>
-        </a>
+        <img>
+        <p>${match.userId}</p>
+        <p>${match.rating}</p>
       </li>
       `).join('');
     },

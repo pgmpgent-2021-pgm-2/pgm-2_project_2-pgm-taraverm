@@ -41,7 +41,22 @@ function TinderApi () {
     }
   };
 
-  this.addMessageBetweenUsers = async (userId, friendId, message) => {
+  this.addMessageBetweenUsers = async (message) => {
+    console.log(message);
+    try {
+      const response = await fetch(`${TINDER_BASE_PATH}/messages`, {
+        method: 'POST',
+        mode: 'cors',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(message),
+      });
+      const data = await response.json();
+      return data;
+    } catch (error) {
+      console.log('An error has occured!', error);
+    }
   };
 
   this.getMatchesForUser = async (userId) => {

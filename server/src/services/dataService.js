@@ -78,6 +78,7 @@ const getMessages = () => {
   try {
     // Read the messages.json file
     const messages = readDataFromMessagesFile();
+    
     return messages;
   } catch (error) {
     throw new HTTPError("Can't get messages", 500);
@@ -121,9 +122,39 @@ const getMessagesFromUser = (userId, friendId, type) => {
     if (!selectedUser) {
       throw new HTTPError(`Can't get messages for the user with userId ${userId}`, 404);
     }
+    selectedUser.sort((a, b) => {
+      if (a.createdAt < b.createdAt) {
+        return 1;
+      } if (a.createdAt > b.createdAt) {
+        return -1;
+      }
+      return 0;
+    });
     return selectedUser;
   } catch (error) {
     throw error;
+  }
+};
+
+/*
+Create a new message
+*/
+const createMessage = (message) => {
+  try {
+    // Read the messages.json file
+    const messages = readDataFromMessagesFile();
+    // Create a message
+    const messageToCreate = {
+      ...message,
+      id: uuidv4(),
+      createdAt: Date.now(),
+    };
+    messages.push(messageToCreate);
+    // Write messages array to the messages.json file
+    fs.writeFileSync(filePathMessages, JSON.stringify(messages, null, 2));
+    return messageToCreate;
+  } catch (error) {
+    throw new HTTPError('Cant\'t create a new post!', 501);
   }
 };
 
@@ -149,11 +180,10 @@ const getMatchesFromUser = (userId) => {
     // Read the matches.json file
     const matches = readDataFromMatchesFile();
     // Find matches for a specific user
-    let userMatches = matches.filter(match => match.userId === userId);
-    if (!userMatches) {
-      // ?
-      userMatches = matches.filter(match => match.userId !== userId);
-    }
+    const userMatches = matches.filter(match => match.userId === userId);
+    // if (!userMatches) {
+    //   userMatches = matches.filter(match => match.userId !== userId);
+    // }
     return userMatches;
   } catch (error) {
     throw error;
@@ -167,6 +197,7 @@ module.exports = {
   getMessages,
   getMessageById,
   getMessagesFromUser,
+  createMessage,
   getMatches,
   getMatchesFromUser,
 };

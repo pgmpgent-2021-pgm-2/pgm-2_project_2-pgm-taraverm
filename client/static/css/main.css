@@ -81,11 +81,11 @@ a {
   padding: 1rem;
 }
 
-.textfield {
+#txtMessage {
   padding: 4rem;
 }
 
-.stuur {
+.btn__send-message {
   padding: 0.5rem;
   background-color: #eb94b5;
   border: none;
@@ -126,4 +126,11 @@ a {
   background-color: #ffebf3;
   border-radius: 1rem;
   padding: 1rem;
+}
+
+.date {
+  font-weight: 200;
+  font-size: 0.7rem;
+  text-align: right;
+  margin: 0.5rem;
 }
