@@ -122,14 +122,6 @@ const getMessagesFromUser = (userId, friendId, type) => {
     if (!selectedUser) {
       throw new HTTPError(`Can't get messages for the user with userId ${userId}`, 404);
     }
-    selectedUser.sort((a, b) => {
-      if (a.createdAt < b.createdAt) {
-        return 1;
-      } if (a.createdAt > b.createdAt) {
-        return -1;
-      }
-      return 0;
-    });
     return selectedUser;
   } catch (error) {
     throw error;
