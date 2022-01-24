@@ -49,7 +49,7 @@ a {
 
 .layout {
   display: flex;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
   justify-content: flex-start;
 }
 
@@ -58,14 +58,48 @@ a {
   max-width: 100%;
 }
 
+.scroll-full {
+  height: 42rem;
+  overflow-y: scroll;
+}
+
+.scroll-half {
+  height: 17rem;
+  overflow-y: scroll;
+}
+
+.scroll-chat {
+  height: 31rem;
+  overflow-y: scroll;
+}
+
 .chatbox {
-  width: 30rem;
+  width: 25rem;
   max-width: 100%;
+  margin: 0 auto;
+  background-color: #ffebf3;
+  padding: 1rem;
+}
+
+.textfield {
+  padding: 4rem;
+}
+
+.stuur {
+  padding: 0.5rem;
+  background-color: #eb94b5;
+  border: none;
+  border-radius: 0.2rem;
+  font-family: inherit;
 }
 
 .selected {
-  background-color: #FD297B;
-  color: #FFF;
+  color: #d47a9c;
+  background-color: #ffebf3;
+}
+
+.user {
+  border-bottom: 0.1rem #ffebf3 solid;
 }
 
 .user a {
@@ -78,3 +112,18 @@ a {
   margin-right: 1rem;
 }
 
+.inbox-amount,
+.outbox-amount {
+  background-color: #d47a9c;
+  color: #FFF;
+  border-radius: 0.5rem;
+  padding: 0.3rem;
+}
+
+.chatbox-message {
+  max-width: 15rem;
+  margin: 1rem 0 1rem 8rem;
+  background-color: #ffebf3;
+  border-radius: 1rem;
+  padding: 1rem;
+}

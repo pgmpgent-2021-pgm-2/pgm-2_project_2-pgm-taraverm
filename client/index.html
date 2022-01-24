@@ -13,89 +13,45 @@
     <div class="layout">
         <section class="users box-layout">
             <h1>USERS</h1>
-            <ul class="users-box"></ul>
+            <ul class="users-box scroll-full"></ul>
         </section>
         <!-- Messages -->
         <section class="messages box-layout">
             <h1>MESSAGES</h1>
             <div class="inbox">
-                <h2>INBOX</h2>
-                <p>27</p>
-                <ul class="incoming-messages"></ul>
+                <h2>
+                    <span>INBOX</span>
+                    <span class="inbox-amount"></span>
+                </h2>
+                <ul class="incoming-messages scroll-half"></ul>
             </div>
             <div class="outbox">
-                <h2>OUTBOX</h2>
-                <p>21</p>
-                <ul class="outgoing-messages"></ul>
+                <h2>
+                    <span>OUTBOX</span>
+                    <span class="outbox-amount"></span>
+                </h2>
+                <ul class="outgoing-messages scroll-half"></ul>
             </div>
         </section>
         <!-- Conversation -->
-        <section class="conversation chatbox">
+        <section class="conversation">
             <h1>CONVERSATION</h1>
-            <img>
-            <p>Naam</p>
-            <div class="send-message">
-                <p>Datum</p>
-                <p>Bericht</p>
-            </div>
-            <div class="received-message">
-                <p>Datum</p>
-                <p>Bericht</p>
-            </div>
+            <div class="conversation-messages scroll-chat"></div>
             <form class="chatbox">
-                <input type="text">
-                <button>Send</button>
+                <input type="text" class="textfield" placeholder="Typ hier uw bericht">
+                <button class="stuur">Stuur</button>
             </form>
         </section>
         <!-- Match Maker -->
         <section class="match-maker box-layout">
             <h1>MATCH MAKER</h1>
-            <div class="no-matches">
+            <div>
                 <h2>NO MATCHES</h2>
-                <div class="no-match">
-                    <img>
-                    <h3>Naam</h3>
-                    <p>Leeftijd</p><svg>Geslacht icoontje</svg>
-                    <p>Woonplaats</p>
-                    <p>Land</p>
-                    <svg>Kruisje</svg>
-                    <svg>Hartje</svg>
-                    <svg>Ster</svg>
-                </div>
-                <div class="no-match">
-                    <img>
-                    <h3>Naam</h3>
-                    <p>Leeftijd</p><svg>Geslacht icoontje</svg>
-                    <p>Woonplaats</p>
-                    <p>Land</p>
-                    <svg>Kruisje</svg>
-                    <svg>Hartje</svg>
-                    <svg>Ster</svg>
-                </div>
+                <ul class="no-matches scroll-half"></ul>
             </div>
-            <div class="matches">
+            <div>
                 <h2>MATCHES</h2>
-                <div class="match">
-                    <img>
-                    <h3>Naam</h3>
-                    <p>Leeftijd</p><svg>Geslacht icoontje</svg>
-                    <p>Woonplaats</p>
-                    <p>Land</p>
-                    <svg>Bericht sturen</svg><svg>Ster / Kruisje</svg>
-                    <svg>Kruisje</svg>
-                    <svg>Hartje</svg>
-                    <svg>Ster</svg>
-                </div>
-                <div class="match">
-                    <img>
-                    <h3>Naam</h3>
-                    <p>Leeftijd</p><svg>Geslacht icoontje</svg>
-                    <p>Woonplaats</p>
-                    <p>Land</p>
-                    <svg>Kruisje</svg>
-                    <svg>Hartje</svg>
-                    <svg>Ster</svg>
-                </div>
+                <ul class="matches scroll-half"></ul>
             </div>
         </section>
     </div>

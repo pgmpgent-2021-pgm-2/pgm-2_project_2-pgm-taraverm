@@ -32,12 +32,26 @@ function TinderApi () {
   };
 
   this.getConversationBetweenUsers = async (userId, friendId) => {
+    try {
+      const response = await fetch(`${TINDER_BASE_PATH}/users/${userId}/messages?type=conversation&friendId=${friendId}`);
+      const data = await response.json();
+      return data;
+    } catch (error) {
+      console.log('An error has occured', error);
+    }
   };
 
   this.addMessageBetweenUsers = async (userId, friendId, message) => {
   };
 
   this.getMatchesForUser = async (userId) => {
+    try {
+      const response = await fetch(`${TINDER_BASE_PATH}/users/${userId}/matches`);
+      const data = await response.json();
+      return data;
+    } catch (error) {
+      console.log('An error has occured!', error);
+    } 
   };
 
   this.addMatch = async (userId, friendId, rating) => {

@@ -2,6 +2,7 @@
 Import packages
 */
 const fs = require('fs');
+const { url } = require('inspector');
 const path = require('path');
 const { send } = require('process');
 const { v4: uuidv4 } = require('uuid');
@@ -53,6 +54,24 @@ const getUsers = () => {
 };
 
 /*
+Get a specific user
+*/
+const getUserById = (userId) => {
+  try {
+    // Read the users.json file
+    const users = readDataFromUsersFile();
+    // Find a specific user
+    const user = users.find(u => u.id === userId);
+    if (!user) {
+      throw new HTTPError(`Cant't find the user with id ${userId}!`, 404);
+    }
+    return user;
+  } catch (error) {
+    throw error;
+  }
+};
+
+/*
 Get all messages
 */
 const getMessages = () => {
@@ -66,18 +85,38 @@ const getMessages = () => {
 };
 
 /*
+Get a specific message
+*/
+const getMessageById = (messageId) => {
+  try {
+    // Read the users.json file
+    const messages = readDataFromMessagesFile();
+    // Find a specific user
+    const message = messages.find(m => m.id === messageId);
+    if (!message) {
+      throw new HTTPError(`Cant't find the user with id ${messageId}!`, 404);
+    }
+    return message;
+  } catch (error) {
+    throw error;
+  }
+};
+
+/*
 Get incoming & outgoing messages for a specific user
 */
-const getMessagesFromUser = (userId, type) => {
+const getMessagesFromUser = (userId, friendId, type) => {
   try {
     // Read the messages.json file
     const messages = readDataFromMessagesFile();
     // Find messages for a specific user
-    const selectedUser = messages.filter(message => message.senderId === userId || message.receiverId === userId);
+    let selectedUser = messages.filter(message => message.senderId === userId || message.receiverId === userId);
     if (type === 'received') {
-      selectedUser.filter(message => message.receiverId === userId);
-    } if (type === 'sent') {
-      selectedUser.filter(message => message.senderId === userId);
+      selectedUser = selectedUser.filter(message => message.receiverId === userId);
+    } else if (type === 'sent') {
+      selectedUser = selectedUser.filter(message => message.senderId === userId);
+    } else if (type === 'conversation') {
+      selectedUser = selectedUser.filter(message => (message.senderId === userId && message.receiverId === friendId) || (message.senderId === friendId && message.receiverId === userId));
     }
     if (!selectedUser) {
       throw new HTTPError(`Can't get messages for the user with userId ${userId}`, 404);
@@ -102,10 +141,32 @@ const getMatches = () => {
   }
 };
 
+/*
+Get all matches for a specific user
+*/
+const getMatchesFromUser = (userId) => {
+  try {
+    // Read the matches.json file
+    const matches = readDataFromMatchesFile();
+    // Find matches for a specific user
+    let userMatches = matches.filter(match => match.userId === userId);
+    if (!userMatches) {
+      // ?
+      userMatches = matches.filter(match => match.userId !== userId);
+    }
+    return userMatches;
+  } catch (error) {
+    throw error;
+  }
+};
+
 // Export all the methods of the data service
 module.exports = {
-  getMessages,
-  getMatches,
-  getMessagesFromUser,
   getUsers,
+  getUserById,
+  getMessages,
+  getMessageById,
+  getMessagesFromUser,
+  getMatches,
+  getMatchesFromUser,
 };

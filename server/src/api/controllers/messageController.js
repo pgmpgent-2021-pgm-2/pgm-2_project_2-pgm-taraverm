@@ -22,7 +22,16 @@ const getMessages = (req, res, next) => {
 Get a specific message
 */
 const getMessageById = (req, res, next) => {
-  handleHTTPError(new HTTPError('The action method is not yet implemented!', 501), next);
+  try {
+    // Get messageId parameter
+    const { messageId } = req.params;
+    // Get specific user from service
+    const user = dataService.getMessageById(messageId);
+    // Send response
+    res.status(200).json(user);
+  } catch (error) {
+    handleHTTPError(error, next);
+  }
 };
 
 /*
@@ -32,9 +41,9 @@ const getMessagesFromUserById = (req, res, next) => {
   try {
     // Get userId & type parameter from the url
     const { userId } = req.params;
-    const { type } = req.query;
+    const { type, friendId } = req.query;
     // Get messages from service
-    const messages = dataService.getMessagesFromUser(userId, type);
+    const messages = dataService.getMessagesFromUser(userId, friendId, type);
     // Send response
     res.status(200).json(messages);
   } catch (error) {
